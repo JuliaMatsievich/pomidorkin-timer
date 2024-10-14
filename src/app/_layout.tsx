@@ -1,4 +1,4 @@
-import { Colors } from '@/constants/Colors'
+import { ColorsApp } from '@/constants/ColorsApp'
 import { useAuth } from '@/hooks/useAuth'
 import { AuthProvider } from '@/providers/AuthProvider'
 import DarkTheme from '@/themes/DarkTheme'
@@ -29,7 +29,6 @@ export default function RootLayout() {
     if (loaded) {
       const ignore = SplashScreen.hideAsync()
     }
-    console.log('user', user)
   }, [loaded])
 
   if (!loaded) {
@@ -50,10 +49,10 @@ export default function RootLayout() {
               name="(app)"
               options={{
                 headerShown: true,
-                headerTitle: 'Pomidoro',
+                headerTitle: 'Помидоркин Таймер',
                 headerTitleAlign: 'center',
-                statusBarColor: Colors.black,
-                navigationBarColor: Colors.black
+                statusBarColor: ColorsApp.black,
+                navigationBarColor: ColorsApp.black
               }}
             />
             <Stack.Screen name="+not-found" />
