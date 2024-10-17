@@ -1,4 +1,4 @@
-import { ThemedText } from '@/components/CustomUI/ThemedText'
+import { ThemedText } from '@/components/customUI/ThemedText'
 import * as React from 'react'
 import renderer from 'react-test-renderer'
 

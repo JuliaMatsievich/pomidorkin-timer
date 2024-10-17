@@ -1,18 +1,18 @@
 // import ParallaxScrollView from '@/components/ParallaxScrollView'
-import { StyleSheet, Text, View } from 'react-native'
+import { ThemedView } from '@/components/customUI/ThemedView'
+import { Timer } from '@/components/timer/timer'
+import { StyleSheet } from 'react-native'
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-    </View>
+    <ThemedView style={styles.container}>
+      <Timer />
+    </ThemedView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    flex: 1
   }
 })

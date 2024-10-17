@@ -1,6 +1,6 @@
-import { ThemedText } from '@/components/CustomUI/ThemedText'
-import { ThemedTextInput } from '@/components/CustomUI/ThemedTextInput'
-import { ThemedView } from '@/components/CustomUI/ThemedView'
+import { ThemedText } from '@/components/customUI/ThemedText'
+import { ThemedTextInput } from '@/components/customUI/ThemedTextInput'
+import { ThemedView } from '@/components/customUI/ThemedView'
 import { IAuthFormData } from '@/types/auth.types'
 import { FC } from 'react'
 import {

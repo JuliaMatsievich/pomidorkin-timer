@@ -10,13 +10,15 @@ import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import 'react-native-reanimated'
-import { useColorScheme } from 'react-native'
+import { Platform, SafeAreaView, useColorScheme } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 const ignore = SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
   const colorScheme = useColorScheme()
+  const { top, bottom } = useSafeAreaInsets()
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf')
   })
@@ -39,24 +41,31 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : LightTheme}>
-          <Stack
-            screenOptions={{
-              headerTitleStyle: {
-                fontWeight: 'bold'
-              }
+          <SafeAreaView
+            style={{
+              flex: 1,
+              paddingTop: Platform.OS === 'ios' ? top / 5 : top * 1.6,
+              paddingBottom: Platform.OS === 'ios' ? bottom * 5 : bottom
             }}>
-            <Stack.Screen
-              name="(app)"
-              options={{
-                headerShown: true,
-                headerTitle: 'Помидоркин Таймер',
-                headerTitleAlign: 'center',
-                statusBarColor: ColorsApp.black,
-                navigationBarColor: ColorsApp.black
-              }}
-            />
-            <Stack.Screen name="+not-found" />
-          </Stack>
+            <Stack
+              screenOptions={{
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}>
+              <Stack.Screen
+                name="(app)"
+                options={{
+                  headerShown: false,
+                  statusBarColor:
+                    colorScheme === 'dark' ? ColorsApp.black : ColorsApp.white,
+                  navigationBarColor:
+                    colorScheme === 'dark' ? ColorsApp.black : ColorsApp.white
+                }}
+              />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          </SafeAreaView>
         </ThemeProvider>
       </AuthProvider>
     </QueryClientProvider>

@@ -5,7 +5,14 @@ import { StyleSheet, Text, type TextProps } from 'react-native'
 interface ThemedTextProps extends TextProps {
   lightColor?: string
   darkColor?: string
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'error'
+  type?:
+    | 'default'
+    | 'title'
+    | 'defaultSemiBold'
+    | 'subtitle'
+    | 'link'
+    | 'error'
+    | 'time'
 }
 
 export function ThemedText({
@@ -27,6 +34,7 @@ export function ThemedText({
         type === 'subtitle' && styles.subtitle,
         type === 'link' && styles.link,
         type === 'error' && styles.error,
+        type === 'time' && styles.time,
         style
       ]}
       {...rest}
@@ -64,5 +72,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: ColorsApp.red,
     alignSelf: 'flex-start'
+  },
+  time: {
+    fontSize: 45
   }
 })
