@@ -1,14 +1,13 @@
 import { ThemedView } from '@/components/customUI/ThemedView'
 import { ColorsApp } from '@/constants/ColorsApp'
 import { sessionCount } from '@/constants/timer.const'
+import { IProgressPointProps } from '@/types/progressBar.types'
 import { FontAwesome } from '@expo/vector-icons'
 import { FC } from 'react'
 import { styles } from './restIndicator.styles'
 
-interface IRestIndicatorProps {
-  index: number
-  currentBreak: number
-}
+interface IRestIndicatorProps
+  extends Pick<IProgressPointProps, 'index' | 'currentBreak'> {}
 
 export const RestIndicator: FC<IRestIndicatorProps> = ({
   index,

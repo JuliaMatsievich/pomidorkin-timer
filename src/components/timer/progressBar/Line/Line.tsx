@@ -1,15 +1,11 @@
 import { ThemedView } from '@/components/customUI/ThemedView'
 import { styles as stylesCommon } from '@/components/timer/progressBar/progressBar.styles'
+import { IProgressPointProps } from '@/types/progressBar.types'
 import { FC } from 'react'
 import { useColorScheme } from 'react-native'
 import { styles } from './line.styles'
 
-interface ILineProps {
-  isSmallProgressBar: boolean
-  index: number
-  currentSession: number
-  isPlaying: boolean
-}
+interface ILineProps extends Omit<IProgressPointProps, 'currentBreak'> {}
 
 export const Line: FC<ILineProps> = ({
   isSmallProgressBar,

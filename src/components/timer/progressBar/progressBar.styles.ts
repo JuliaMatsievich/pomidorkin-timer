@@ -22,10 +22,6 @@ export const styles = (colorScheme: ColorSchemeName, isPlaying: boolean) =>
       gap: 5,
       position: 'relative'
     },
-    progressBarCircleRest: {
-      position: 'absolute',
-      top: -20
-    },
     passed: {
       backgroundColor:
         colorScheme === 'dark' ? ColorsApp.primaryDark : ColorsApp.primaryLight,
@@ -42,15 +38,5 @@ export const styles = (colorScheme: ColorSchemeName, isPlaying: boolean) =>
       borderColor:
         colorScheme === 'dark' ? ColorsApp.primaryDark : ColorsApp.primaryLight,
       opacity: 0.8
-    },
-    progressBarLine: {
-      width: 22,
-      height: 1,
-      backgroundColor: ColorsApp.colorProgress
-    },
-    progressBarLineSmall: {
-      width: 18,
-      height: 1,
-      backgroundColor: ColorsApp.colorProgress
     }
   })
