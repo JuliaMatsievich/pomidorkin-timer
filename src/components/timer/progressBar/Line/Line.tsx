@@ -5,13 +5,13 @@ import { FC } from 'react'
 import { useColorScheme } from 'react-native'
 import { styles } from './line.styles'
 
-interface ILineProps extends Omit<IProgressPointProps, 'currentBreak'> {}
+interface ILineProps
+  extends Omit<IProgressPointProps, 'currentBreak' | 'isPlaying'> {}
 
 export const Line: FC<ILineProps> = ({
   isSmallProgressBar,
   currentSession,
-  index,
-  isPlaying
+  index
 }) => {
   const colorScheme = useColorScheme()
 
@@ -22,8 +22,7 @@ export const Line: FC<ILineProps> = ({
           isSmallProgressBar
             ? styles.progressBarLineSmall
             : styles.progressBarLine,
-          index + 2 <= currentSession &&
-            stylesCommon(colorScheme, isPlaying).passed
+          index + 2 <= currentSession && stylesCommon.passed
         ]}
       />
     </>

@@ -1,15 +1,16 @@
-import { ColorsApp } from '@/constants/ColorsApp'
+import { ColorsInApp } from '@/constants/ColorsApp.const'
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { ThemeCustom } from '@/types/theme.types'
 
 const DarkTheme: ThemeCustom = {
-  dark: false,
+  dark: true,
   colors: {
-    primary: ColorsApp.primaryDark,
-    background: ColorsApp.black2,
-    card: ColorsApp.black,
-    text: ColorsApp.white,
-    border: ColorsApp.grey,
-    notification: ColorsApp.red
+    primary: ColorsAppTheme.dark.primary,
+    background: ColorsAppTheme.dark.background,
+    card: ColorsInApp.black,
+    text: ColorsAppTheme.dark.text,
+    border: ColorsInApp.grey,
+    notification: ColorsAppTheme.dark.error
   }
 }
 

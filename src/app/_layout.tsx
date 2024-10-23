@@ -1,5 +1,5 @@
-import { ColorsApp } from '@/constants/ColorsApp'
 import { useAuth } from '@/hooks/useAuth'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { AuthProvider } from '@/providers/AuthProvider'
 import DarkTheme from '@/themes/DarkTheme'
 import LightTheme from '@/themes/LightTheme'
@@ -57,10 +57,9 @@ export default function RootLayout() {
                 name="(app)"
                 options={{
                   headerShown: false,
-                  statusBarColor:
-                    colorScheme === 'dark' ? ColorsApp.black : ColorsApp.white,
-                  navigationBarColor:
-                    colorScheme === 'dark' ? ColorsApp.black : ColorsApp.white
+                  statusBarColor: useThemeColor('statusBarColor'),
+                  statusBarStyle: colorScheme === 'dark' ? 'light' : 'dark',
+                  navigationBarColor: useThemeColor('navigationBarColor')
                 }}
               />
               <Stack.Screen name="+not-found" />

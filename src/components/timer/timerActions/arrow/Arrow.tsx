@@ -1,5 +1,5 @@
-import { ColorsApp } from '@/constants/ColorsApp'
 import { sessionCount } from '@/constants/timer.const'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { EnumStatus, ITimerOptions, ITimerProps } from '@/types/timer.types'
 import { MaterialIcons } from '@expo/vector-icons'
 import React, { FC } from 'react'
@@ -8,12 +8,11 @@ import { styles } from './arrow.styles'
 
 interface IArrowProps
   extends Omit<ITimerProps, 'timerOptions'>,
-    Pick<ITimerOptions, 'currentSession' | 'isPlaying'> {
+    Pick<ITimerOptions, 'currentSession'> {
   direction: 'left' | 'right'
 }
 
 export const Arrow: FC<IArrowProps> = ({
-  isPlaying,
   currentSession,
   setTimerOptions,
   direction
@@ -59,7 +58,7 @@ export const Arrow: FC<IArrowProps> = ({
         <MaterialIcons
           name={`arrow-${direction}`}
           size={50}
-          color={ColorsApp.lightGrey}
+          color={useThemeColor('icons2')}
         />
       </Pressable>
     </>

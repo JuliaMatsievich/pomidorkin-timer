@@ -1,6 +1,6 @@
 import { ThemedView } from '@/components/customUI/ThemedView'
-import { ColorsApp } from '@/constants/ColorsApp'
 import { sessionCount } from '@/constants/timer.const'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { IProgressPointProps } from '@/types/progressBar.types'
 import { FontAwesome } from '@expo/vector-icons'
 import { FC } from 'react'
@@ -22,8 +22,8 @@ export const RestIndicator: FC<IRestIndicatorProps> = ({
             size={10}
             color={
               index < currentBreak
-                ? ColorsApp.primaryDark
-                : ColorsApp.colorProgress
+                ? useThemeColor('primary')
+                : useThemeColor('colorProgress')
             }
           />
         )}

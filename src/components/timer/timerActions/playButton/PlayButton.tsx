@@ -1,9 +1,9 @@
-import { ColorsApp } from '@/constants/ColorsApp'
 import { sessionCount } from '@/constants/timer.const'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { ITimerOptions, ITimerProps } from '@/types/timer.types'
 import { Foundation } from '@expo/vector-icons'
 import React, { FC } from 'react'
-import { Pressable, useColorScheme } from 'react-native'
+import { Pressable } from 'react-native'
 import { styles } from './playButton.styles'
 
 interface IPlayButtonProps
@@ -15,7 +15,6 @@ export const PlayButton: FC<IPlayButtonProps> = ({
   currentSession,
   setTimerOptions
 }) => {
-  const colorScheme = useColorScheme()
   const isAllSessionsCompleted = currentSession - 1 >= sessionCount
   return (
     <>
@@ -23,10 +22,10 @@ export const PlayButton: FC<IPlayButtonProps> = ({
         style={
           isAllSessionsCompleted
             ? [
-                styles(colorScheme, isPlaying).timerBtnPlay,
-                styles(colorScheme, isPlaying).timerBtnPlayDesable
+                styles(isPlaying).timerBtnPlay,
+                styles(isPlaying).timerBtnPlayDesable
               ]
-            : styles(colorScheme, isPlaying).timerBtnPlay
+            : styles(isPlaying).timerBtnPlay
         }
         onPress={() => {
           if (isAllSessionsCompleted) return
@@ -35,7 +34,7 @@ export const PlayButton: FC<IPlayButtonProps> = ({
         <Foundation
           name={isPlaying ? 'pause' : 'play'}
           size={44}
-          color={ColorsApp.white}
+          color={useThemeColor('icon')}
         />
       </Pressable>
     </>

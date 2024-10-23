@@ -1,10 +1,7 @@
-import { ColorsApp } from '@/constants/ColorsApp'
 import { useThemeColor } from '@/hooks/useThemeColor'
 import { StyleSheet, Text, type TextProps } from 'react-native'
 
 interface ThemedTextProps extends TextProps {
-  lightColor?: string
-  darkColor?: string
   type?:
     | 'default'
     | 'title'
@@ -17,12 +14,10 @@ interface ThemedTextProps extends TextProps {
 
 export function ThemedText({
   style,
-  lightColor,
-  darkColor,
   type = 'default',
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
+  const color = useThemeColor('text')
 
   return (
     <Text
@@ -70,7 +65,7 @@ const styles = StyleSheet.create({
   error: {
     lineHeight: 30,
     fontSize: 12,
-    color: ColorsApp.red,
+    color: useThemeColor('error'),
     alignSelf: 'flex-start'
   },
   time: {

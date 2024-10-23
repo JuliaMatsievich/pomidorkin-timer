@@ -6,12 +6,10 @@ import { ResetButton } from '@/components/timer/timerActions/resetButton/ResetBu
 import { TimerButtons } from '@/components/timer/timerActions/TimerButtons'
 import { EnumStatus, EnumStatusImg, ITimerOptions } from '@/types/timer.types'
 import { FC, useRef, useState } from 'react'
-import { useColorScheme } from 'react-native'
 import ConfettiCannon from 'react-native-confetti-cannon'
 import { styles } from './timer.styles'
 
 export const Timer: FC = () => {
-  const colorScheme = useColorScheme()
   const [timerOptions, setTimerOptions] = useState<ITimerOptions>({
     isPlaying: false,
     status: EnumStatus.WORK,
@@ -29,10 +27,8 @@ export const Timer: FC = () => {
 
   return (
     <>
-      <ThemedView style={styles(colorScheme).container}>
-        <ThemedText style={styles(colorScheme).timerTitle}>
-          Название задачи
-        </ThemedText>
+      <ThemedView style={styles.container}>
+        <ThemedText style={styles.timerTitle}>Название задачи</ThemedText>
 
         <ResetButton setTimerOptions={setTimerOptions} />
 

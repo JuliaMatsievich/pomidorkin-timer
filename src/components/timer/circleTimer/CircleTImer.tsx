@@ -1,7 +1,7 @@
 import { TimerInfo } from '@/components/timer/circleTimer/TimerInfo'
-import { ColorsApp } from '@/constants/ColorsApp'
 import { breakDuration, flowDuration } from '@/constants/timer.const'
 import { useEffectTimer } from '@/hooks/useEffectTimer'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { EnumStatus, EnumStatusImg, ITimerProps } from '@/types/timer.types'
 import React, { FC } from 'react'
 import {
@@ -26,7 +26,7 @@ export const CircleTimer: FC<ICircleTimerProps> = ({
         key={key}
         isPlaying={isPlaying}
         duration={status === EnumStatus.REST ? breakDuration : flowDuration}
-        trailColor={ColorsApp.colorProgress as ColorFormat}
+        trailColor={useThemeColor('colorProgress') as ColorFormat}
         colors={[`#fe6927`, `#bb6c40`]}
         colorsTime={[
           status === EnumStatus.REST ? breakDuration : flowDuration,

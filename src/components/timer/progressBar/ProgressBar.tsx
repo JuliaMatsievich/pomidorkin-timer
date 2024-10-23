@@ -5,7 +5,6 @@ import { RestIndicator } from '@/components/timer/progressBar/RestIndicator/Rest
 import { sessionCount } from '@/constants/timer.const'
 import { IProgressBarProps } from '@/types/progressBar.types'
 import { FC } from 'react'
-import { useColorScheme } from 'react-native'
 import { styles } from './progressBar.styles'
 
 export const ProgressBar: FC<IProgressBarProps> = ({
@@ -13,30 +12,24 @@ export const ProgressBar: FC<IProgressBarProps> = ({
   currentSession,
   currentBreak
 }) => {
-  const colorScheme = useColorScheme()
   const isSmallProgressBar = sessionCount > 7
   return (
     <>
-      <ThemedView style={styles(colorScheme, isPlaying).progressBarContainer}>
+      <ThemedView style={styles.progressBarContainer}>
         {Array.from(Array(sessionCount)).map((_, index) => (
-          <ThemedView
-            key={`point-${index}`}
-            style={styles(colorScheme, isPlaying).progressBarItem}>
+          <ThemedView key={`point-${index}`} style={styles.progressBarItem}>
             <Indicator
               isSmallProgressBar={isSmallProgressBar}
               index={index}
-              isPlaying={isPlaying}
               currentSession={currentSession}
             />
-            <ThemedView
-              style={styles(colorScheme, isPlaying).progressBarLineItem}>
+            <ThemedView style={styles.progressBarLineItem}>
               <RestIndicator index={index} currentBreak={currentBreak} />
               {index + 1 !== sessionCount && (
                 <Line
                   isSmallProgressBar={isSmallProgressBar}
                   index={index}
                   currentSession={currentSession}
-                  isPlaying={isPlaying}
                 />
               )}
             </ThemedView>

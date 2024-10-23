@@ -1,11 +1,11 @@
-import { ColorsApp } from '@/constants/ColorsApp'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { FC } from 'react'
 import { ActivityIndicator } from 'react-native'
 
 export const Loader: FC = () => {
   return (
     <>
-      <ActivityIndicator size={60} color={ColorsApp.primaryDark} />
+      <ActivityIndicator size={60} color={useThemeColor('primary')} />
     </>
   )
 }

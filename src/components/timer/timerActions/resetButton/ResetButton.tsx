@@ -1,4 +1,4 @@
-import { ColorsApp } from '@/constants/ColorsApp'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { EnumStatus, EnumStatusImg, ITimerProps } from '@/types/timer.types'
 import { Entypo } from '@expo/vector-icons'
 import { FC } from 'react'
@@ -23,7 +23,7 @@ export const ResetButton: FC<IResetButtonProps> = ({ setTimerOptions }) => {
             key: 0
           })
         }}>
-        <Entypo name={'ccw'} size={40} color={ColorsApp.lightGrey} />
+        <Entypo name={'ccw'} size={40} color={useThemeColor('icons2')} />
       </Pressable>
     </>
   )

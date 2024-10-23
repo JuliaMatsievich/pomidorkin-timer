@@ -1,6 +1,6 @@
 import { TabBarIcon } from '@/components/navigation/TabBarIcon'
-import { ColorsApp } from '@/constants/ColorsApp'
 import { useAuth } from '@/hooks/useAuth'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { Tabs } from 'expo-router'
 import React from 'react'
 import { useColorScheme } from 'react-native'
@@ -18,8 +18,7 @@ export default function TabLayout() {
         headerShown: true,
         headerTitleAlign: 'center',
         tabBarStyle: {
-          backgroundColor:
-            colorScheme === 'dark' ? ColorsApp.black : ColorsApp.white,
+          backgroundColor: useThemeColor('background'),
           borderWidth: 0
         },
         headerStyle: {

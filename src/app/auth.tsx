@@ -4,9 +4,9 @@ import { ThemedText } from '@/components/customUI/ThemedText'
 import { ThemedView } from '@/components/customUI/ThemedView'
 import { FormItem } from '@/components/form/FormItem'
 import { Loader } from '@/components/Loader'
-import { ColorsApp } from '@/constants/ColorsApp'
-import { validEmail } from '@/constants/Patterns'
+import { validEmail } from '@/constants/Patterns.const'
 import { useAuth } from '@/hooks/useAuth'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { IAuthFormData } from '@/types/auth.types'
 import { router, Stack } from 'expo-router'
 import { useState } from 'react'
@@ -15,13 +15,11 @@ import {
   Keyboard,
   StyleSheet,
   TouchableWithoutFeedback,
-  useColorScheme,
   View
 } from 'react-native'
 
 export const Auth = () => {
   const { setUser } = useAuth()
-  const colorScheme = useColorScheme()
 
   const [isReg, setIsReg] = useState(true)
 
@@ -48,8 +46,8 @@ export const Auth = () => {
           headerShown: true,
           headerTitle: 'Помидоркин Таймер',
           headerTitleAlign: 'center',
-          statusBarColor: ColorsApp.black,
-          navigationBarColor: ColorsApp.black
+          statusBarColor: useThemeColor('statusBarColor'),
+          navigationBarColor: useThemeColor('navigationBarColor')
         }}
       />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
