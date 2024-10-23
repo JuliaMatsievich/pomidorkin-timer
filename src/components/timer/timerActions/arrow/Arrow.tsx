@@ -1,6 +1,6 @@
 import { ColorsApp } from '@/constants/ColorsApp'
 import { sessionCount } from '@/constants/timer.const'
-import { ITimerOptions, ITimerProps } from '@/types/timer.types'
+import { EnumStatus, ITimerOptions, ITimerProps } from '@/types/timer.types'
 import { MaterialIcons } from '@expo/vector-icons'
 import React, { FC } from 'react'
 import { Pressable, useColorScheme } from 'react-native'
@@ -28,7 +28,8 @@ export const Arrow: FC<IArrowProps> = ({
         key: prev.key - 1,
         isPlaying: false,
         currentBreak:
-          currentSession % 2 ? prev.currentBreak - 2 : prev.currentBreak
+          currentSession % 2 ? prev.currentBreak - 2 : prev.currentBreak,
+        status: currentSession % 2 ? EnumStatus.REST : EnumStatus.WORK
       }))
     }
   }
@@ -41,7 +42,8 @@ export const Arrow: FC<IArrowProps> = ({
         key: prev.key + 1,
         isPlaying: false,
         currentBreak:
-          currentSession % 2 === 0 ? prev.currentBreak + 2 : prev.currentBreak
+          currentSession % 2 === 0 ? prev.currentBreak + 2 : prev.currentBreak,
+        status: currentSession % 2 ? EnumStatus.REST : EnumStatus.WORK
       }))
     }
   }
@@ -49,7 +51,7 @@ export const Arrow: FC<IArrowProps> = ({
   return (
     <>
       <Pressable
-        style={styles(colorScheme, isPlaying).timerBtnArrow}
+        style={styles(colorScheme).timerBtnArrow}
         onPress={() => {
           if (direction === 'left') handleArrowPrev()
           if (direction === 'right') handleArrowNext()

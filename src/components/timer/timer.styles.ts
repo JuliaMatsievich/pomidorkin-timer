@@ -1,7 +1,7 @@
 import { ColorsApp } from '@/constants/ColorsApp'
 import { ColorSchemeName, StyleSheet } from 'react-native'
 
-export const styles = (colorScheme: ColorSchemeName, isPlaying: boolean) =>
+export const styles = (colorScheme: ColorSchemeName) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -15,17 +15,5 @@ export const styles = (colorScheme: ColorSchemeName, isPlaying: boolean) =>
     timerText: {
       fontSize: 18,
       color: colorScheme === 'dark' ? ColorsApp.white : ColorsApp.black
-    },
-    timerStatusContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 10
-    },
-    timerSubTitle: {
-      alignSelf: 'center'
-    },
-    timerImage: {
-      width: 24,
-      height: 24
     }
   })

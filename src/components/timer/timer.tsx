@@ -1,6 +1,6 @@
 import { ThemedText } from '@/components/customUI/ThemedText'
 import { ThemedView } from '@/components/customUI/ThemedView'
-import { CircleTimer } from '@/components/timer/CircleTImer'
+import { CircleTimer } from '@/components/timer/circleTimer/CircleTImer'
 import { ProgressBar } from '@/components/timer/progressBar/ProgressBar'
 import { ResetButton } from '@/components/timer/timerActions/resetButton/ResetButton'
 import { TimerButtons } from '@/components/timer/timerActions/TimerButtons'
@@ -21,26 +21,16 @@ export const Timer: FC = () => {
     key: 0
   })
 
-  const confettiRef = useRef<ConfettiCannon>()
+  const confettiRef = useRef<ConfettiCannon>(null)
 
   const startConfetti = () => {
     confettiRef.current?.start()
   }
 
-  // useEffect(() => {
-  //   if (isAllSessionsCompleted) {
-  //     setStatus(EnumStatus.COMPLETED)
-  //     setStatusImg(EnumStatusImg.COMPLETED)
-  //     setCurrentBreak(0)
-  //     confettiRef.current?.start()
-  //   }
-  // }, [currentSession, currentBreak, confettiRef])
-
   return (
     <>
-      <ThemedView style={styles(colorScheme, timerOptions.isPlaying).container}>
-        <ThemedText
-          style={styles(colorScheme, timerOptions.isPlaying).timerTitle}>
+      <ThemedView style={styles(colorScheme).container}>
+        <ThemedText style={styles(colorScheme).timerTitle}>
           Название задачи
         </ThemedText>
 

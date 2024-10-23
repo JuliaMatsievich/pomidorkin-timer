@@ -1,16 +1,9 @@
-import { ThemedText } from '@/components/customUI/ThemedText'
-import { ThemedView } from '@/components/customUI/ThemedView'
-import { styles } from '@/components/timer/timer.styles'
+import { TimerInfo } from '@/components/timer/circleTimer/TimerInfo'
 import { ColorsApp } from '@/constants/ColorsApp'
-import {
-  breakDuration,
-  flowDuration,
-  sessionCount
-} from '@/constants/timer.const'
+import { breakDuration, flowDuration } from '@/constants/timer.const'
+import { useEffectTimer } from '@/hooks/useEffectTimer'
 import { EnumStatus, EnumStatusImg, ITimerProps } from '@/types/timer.types'
-import { timeFormatFunc } from '@/utils/timeFormatFunc'
 import React, { FC } from 'react'
-import { Image, useColorScheme } from 'react-native'
 import {
   ColorFormat,
   CountdownCircleTimer
@@ -26,8 +19,7 @@ export const CircleTimer: FC<ICircleTimerProps> = ({
   setTimerOptions,
   startConfetti
 }) => {
-  const colorScheme = useColorScheme()
-  const isAllSessionsCompleted = currentSession - 1 >= sessionCount
+  useEffectTimer({ setTimerOptions, startConfetti, currentSession, status })
   return (
     <>
       <CountdownCircleTimer
@@ -43,21 +35,11 @@ export const CircleTimer: FC<ICircleTimerProps> = ({
         size={300}
         strokeWidth={15}
         onComplete={() => {
-          setTimerOptions((prev) => ({ ...prev, isPlaying: false }))
-
-          if (isAllSessionsCompleted) {
-            setTimerOptions((prev) => {
-              return {
-                ...prev,
-                status: EnumStatus.COMPLETED,
-                statusImg: EnumStatusImg.COMPLETED,
-                currentBreak: 0
-              }
-            })
-            startConfetti()
-          }
-          setTimerOptions((prev) => ({ ...prev, key: prev.key + 1 }))
-
+          setTimerOptions((prev) => ({
+            ...prev,
+            isPlaying: false,
+            key: prev.key + 1
+          }))
           if (status === EnumStatus.REST && currentSession % 2 === 0) {
             setTimerOptions((prev) => ({
               ...prev,
@@ -82,33 +64,14 @@ export const CircleTimer: FC<ICircleTimerProps> = ({
               currentSession: prev.currentSession + 1
             }))
           }
-        }}
-        // onUpdate={(remainingTime) => {
-        //   if (remainingTime) {
-        //     setStatus(EnumStatus.WORK)
-        //     setStatusImg(EnumStatusImg.WORK)
-        //   }
-        // }}
-      >
+        }}>
         {({ remainingTime }) => {
           return (
-            <>
-              <ThemedText type="time">
-                {timeFormatFunc(remainingTime)}
-              </ThemedText>
-              <ThemedView
-                style={styles(colorScheme, isPlaying).timerStatusContainer}>
-                <Image
-                  style={styles(colorScheme, isPlaying).timerImage}
-                  source={statusImg}
-                />
-                <ThemedText
-                  type="subtitle"
-                  style={styles(colorScheme, isPlaying).timerSubTitle}>
-                  {status}
-                </ThemedText>
-              </ThemedView>
-            </>
+            <TimerInfo
+              remainingTime={remainingTime}
+              status={status}
+              statusImg={statusImg}
+            />
           )
         }}
       </CountdownCircleTimer>
