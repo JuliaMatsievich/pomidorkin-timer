@@ -1,4 +1,5 @@
 import { TimerInfo } from '@/components/timer/circleTimer/TimerInfo'
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { breakDuration, flowDuration } from '@/constants/timer.const'
 import { useEffectTimer } from '@/hooks/useEffectTimer'
 import { useThemeColor } from '@/hooks/useThemeColor'
@@ -19,6 +20,7 @@ export const CircleTimer: FC<ICircleTimerProps> = ({
   setTimerOptions,
   startConfetti
 }) => {
+  const theme = useThemeColor()
   useEffectTimer({ setTimerOptions, startConfetti, currentSession, status })
   return (
     <>
@@ -26,7 +28,7 @@ export const CircleTimer: FC<ICircleTimerProps> = ({
         key={key}
         isPlaying={isPlaying}
         duration={status === EnumStatus.REST ? breakDuration : flowDuration}
-        trailColor={useThemeColor('colorProgress') as ColorFormat}
+        trailColor={ColorsAppTheme[theme].trailColor as ColorFormat}
         colors={[`#fe6927`, `#bb6c40`]}
         colorsTime={[
           status === EnumStatus.REST ? breakDuration : flowDuration,

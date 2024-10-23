@@ -1,9 +1,10 @@
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { sessionCount } from '@/constants/timer.const'
 import { useThemeColor } from '@/hooks/useThemeColor'
 import { EnumStatus, ITimerOptions, ITimerProps } from '@/types/timer.types'
 import { MaterialIcons } from '@expo/vector-icons'
 import React, { FC } from 'react'
-import { Pressable, useColorScheme } from 'react-native'
+import { Pressable } from 'react-native'
 import { styles } from './arrow.styles'
 
 interface IArrowProps
@@ -17,8 +18,7 @@ export const Arrow: FC<IArrowProps> = ({
   setTimerOptions,
   direction
 }) => {
-  const colorScheme = useColorScheme()
-
+  const theme = useThemeColor()
   const handleArrowPrev = () => {
     if (currentSession !== 1) {
       setTimerOptions((prev) => ({
@@ -50,7 +50,7 @@ export const Arrow: FC<IArrowProps> = ({
   return (
     <>
       <Pressable
-        style={styles(colorScheme).timerBtnArrow}
+        style={styles(theme).timerBtnArrow}
         onPress={() => {
           if (direction === 'left') handleArrowPrev()
           if (direction === 'right') handleArrowNext()
@@ -58,7 +58,7 @@ export const Arrow: FC<IArrowProps> = ({
         <MaterialIcons
           name={`arrow-${direction}`}
           size={50}
-          color={useThemeColor('icons2')}
+          color={ColorsAppTheme[theme].icons2}
         />
       </Pressable>
     </>

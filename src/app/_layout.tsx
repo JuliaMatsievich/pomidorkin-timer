@@ -1,3 +1,4 @@
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { useAuth } from '@/hooks/useAuth'
 import { useThemeColor } from '@/hooks/useThemeColor'
 import { AuthProvider } from '@/providers/AuthProvider'
@@ -10,14 +11,13 @@ import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import 'react-native-reanimated'
-import { Platform, SafeAreaView, useColorScheme } from 'react-native'
+import { Platform, SafeAreaView } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 const ignore = SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme()
   const { top, bottom } = useSafeAreaInsets()
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf')
@@ -36,11 +36,11 @@ export default function RootLayout() {
   if (!loaded) {
     return null
   }
-
+  const theme = useThemeColor()
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : LightTheme}>
+        <ThemeProvider value={theme === 'dark' ? DarkTheme : LightTheme}>
           <SafeAreaView
             style={{
               flex: 1,
@@ -57,9 +57,9 @@ export default function RootLayout() {
                 name="(app)"
                 options={{
                   headerShown: false,
-                  statusBarColor: useThemeColor('statusBarColor'),
-                  statusBarStyle: colorScheme === 'dark' ? 'light' : 'dark',
-                  navigationBarColor: useThemeColor('navigationBarColor')
+                  statusBarColor: ColorsAppTheme[theme].statusBarColor,
+                  statusBarStyle: theme === 'dark' ? 'light' : 'dark',
+                  navigationBarColor: ColorsAppTheme[theme].navigationBarColor
                 }}
               />
               <Stack.Screen name="+not-found" />

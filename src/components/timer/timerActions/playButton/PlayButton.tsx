@@ -1,3 +1,4 @@
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { sessionCount } from '@/constants/timer.const'
 import { useThemeColor } from '@/hooks/useThemeColor'
 import { ITimerOptions, ITimerProps } from '@/types/timer.types'
@@ -15,6 +16,7 @@ export const PlayButton: FC<IPlayButtonProps> = ({
   currentSession,
   setTimerOptions
 }) => {
+  const theme = useThemeColor()
   const isAllSessionsCompleted = currentSession - 1 >= sessionCount
   return (
     <>
@@ -22,10 +24,10 @@ export const PlayButton: FC<IPlayButtonProps> = ({
         style={
           isAllSessionsCompleted
             ? [
-                styles(isPlaying).timerBtnPlay,
-                styles(isPlaying).timerBtnPlayDesable
+                styles(theme, isPlaying).timerBtnPlay,
+                styles(theme, isPlaying).timerBtnPlayDesable
               ]
-            : styles(isPlaying).timerBtnPlay
+            : styles(theme, isPlaying).timerBtnPlay
         }
         onPress={() => {
           if (isAllSessionsCompleted) return
@@ -34,7 +36,7 @@ export const PlayButton: FC<IPlayButtonProps> = ({
         <Foundation
           name={isPlaying ? 'pause' : 'play'}
           size={44}
-          color={useThemeColor('icon')}
+          color={ColorsAppTheme[theme].icon}
         />
       </Pressable>
     </>

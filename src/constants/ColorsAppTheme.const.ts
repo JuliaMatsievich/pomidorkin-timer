@@ -17,7 +17,8 @@ export const ColorsAppTheme = {
     backgroundInput: ColorsInApp.lightGrey,
     placeholderTextColor: ColorsInApp.lightLightGrey,
     statusBarColor: ColorsInApp.white,
-    navigationBarColor: ColorsInApp.white
+    navigationBarColor: ColorsInApp.white,
+    trailColor: ColorsInApp.lightOrange
   },
   dark: {
     text: ColorsInApp.white,
@@ -35,6 +36,7 @@ export const ColorsAppTheme = {
     backgroundInput: ColorsInApp.grey,
     placeholderTextColor: ColorsInApp.lightGrey,
     statusBarColor: ColorsInApp.black,
-    navigationBarColor: ColorsInApp.black
+    navigationBarColor: ColorsInApp.black,
+    trailColor: ColorsInApp.lightOrange
   }
 }

@@ -1,19 +1,20 @@
-import { useThemeColor } from '@/hooks/useThemeColor'
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
+import { ThemeApp } from '@/types/theme.types'
 import { StyleSheet } from 'react-native'
 
-export const styles = (isPlaying: boolean) =>
+export const styles = (theme: ThemeApp, isPlaying: boolean) =>
   StyleSheet.create({
     timerBtnPlay: {
       width: 60,
       height: 60,
       overflow: 'visible',
-      backgroundColor: useThemeColor('primary'),
+      backgroundColor: ColorsAppTheme[theme].primary,
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 100,
       paddingLeft: isPlaying ? 0 : 5,
       alignSelf: 'center',
-      shadowColor: useThemeColor('shadowColor'),
+      shadowColor: ColorsAppTheme[theme].shadowColor,
       shadowOffset: {
         width: 0,
         height: 2
@@ -23,6 +24,6 @@ export const styles = (isPlaying: boolean) =>
       elevation: 8
     },
     timerBtnPlayDesable: {
-      backgroundColor: useThemeColor('primary')
+      backgroundColor: ColorsAppTheme[theme].primary
     }
   })

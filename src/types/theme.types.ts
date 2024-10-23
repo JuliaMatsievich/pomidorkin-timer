@@ -9,3 +9,5 @@ export type ThemeCustom = {
     notification: string
   }
 }
+
+export type ThemeApp = 'light' | 'dark'

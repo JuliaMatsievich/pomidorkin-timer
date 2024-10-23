@@ -1,12 +1,9 @@
 import { ThemedText } from '@/components/customUI/ThemedText'
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { useThemeColor } from '@/hooks/useThemeColor'
+import { ThemeApp } from '@/types/theme.types'
 import { FC } from 'react'
-import {
-  Pressable,
-  PressableProps,
-  StyleSheet,
-  useColorScheme
-} from 'react-native'
+import { Pressable, PressableProps, StyleSheet } from 'react-native'
 
 interface IButtonProps extends PressableProps {
   title?: string
@@ -14,21 +11,20 @@ interface IButtonProps extends PressableProps {
 }
 
 export const ButtonCustom: FC<IButtonProps> = ({ title, onPress, type }) => {
-  const colorScheme = useColorScheme()
+  const theme = useThemeColor()
 
   return (
     <>
       <Pressable
         onPress={onPress}
         style={[
-          type === 'primaryBtn' && stylesPrimaryBtn.button,
-          type === 'secondBtn' && stylesSecondBtn(colorScheme as string).button
+          type === 'primaryBtn' && stylesPrimaryBtn(theme).button,
+          type === 'secondBtn' && stylesSecondBtn(theme).button
         ]}>
         <ThemedText
           style={[
-            type === 'primaryBtn' && stylesPrimaryBtn.button__text,
-            type === 'secondBtn' &&
-              stylesSecondBtn(colorScheme as string).button__text
+            type === 'primaryBtn' && stylesPrimaryBtn(theme).button__text,
+            type === 'secondBtn' && stylesSecondBtn(theme).button__text
           ]}>
           {title}
         </ThemedText>
@@ -37,23 +33,24 @@ export const ButtonCustom: FC<IButtonProps> = ({ title, onPress, type }) => {
   )
 }
 
-const stylesPrimaryBtn = StyleSheet.create({
-  button: {
-    marginTop: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 5,
-    width: '80%',
-    backgroundColor: useThemeColor('primary')
-  },
-  button__text: {
-    color: useThemeColor('text')
-  }
-})
+const stylesPrimaryBtn = (theme: ThemeApp) =>
+  StyleSheet.create({
+    button: {
+      marginTop: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 5,
+      width: '80%',
+      backgroundColor: ColorsAppTheme[theme].primary
+    },
+    button__text: {
+      color: ColorsAppTheme[theme].text
+    }
+  })
 
-const stylesSecondBtn = (colorScheme: string) =>
+const stylesSecondBtn = (theme: ThemeApp) =>
   StyleSheet.create({
     button: {
       marginTop: 10,
@@ -65,10 +62,10 @@ const stylesSecondBtn = (colorScheme: string) =>
       borderRadius: 5,
       borderStyle: 'solid',
       borderWidth: 1,
-      borderColor: useThemeColor('borderButton'),
+      borderColor: ColorsAppTheme[theme].borderButton,
       backgroundColor: 'transparent'
     },
     button__text: {
-      color: useThemeColor('text')
+      color: ColorsAppTheme[theme].text
     }
   })

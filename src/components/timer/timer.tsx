@@ -4,6 +4,7 @@ import { CircleTimer } from '@/components/timer/circleTimer/CircleTImer'
 import { ProgressBar } from '@/components/timer/progressBar/ProgressBar'
 import { ResetButton } from '@/components/timer/timerActions/resetButton/ResetButton'
 import { TimerButtons } from '@/components/timer/timerActions/TimerButtons'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { EnumStatus, EnumStatusImg, ITimerOptions } from '@/types/timer.types'
 import { FC, useRef, useState } from 'react'
 import ConfettiCannon from 'react-native-confetti-cannon'
@@ -24,11 +25,13 @@ export const Timer: FC = () => {
   const startConfetti = () => {
     confettiRef.current?.start()
   }
-
+  const theme = useThemeColor()
   return (
     <>
-      <ThemedView style={styles.container}>
-        <ThemedText style={styles.timerTitle}>Название задачи</ThemedText>
+      <ThemedView style={styles(theme).container}>
+        <ThemedText style={styles(theme).timerTitle}>
+          Название задачи
+        </ThemedText>
 
         <ResetButton setTimerOptions={setTimerOptions} />
 
@@ -46,7 +49,6 @@ export const Timer: FC = () => {
         />
 
         <ProgressBar
-          isPlaying={timerOptions.isPlaying}
           currentSession={timerOptions.currentSession}
           currentBreak={timerOptions.currentBreak}
         />

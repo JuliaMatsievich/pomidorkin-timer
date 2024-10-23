@@ -1,4 +1,6 @@
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { useThemeColor } from '@/hooks/useThemeColor'
+import { ThemeApp } from '@/types/theme.types'
 import { FC } from 'react'
 import { FieldError } from 'react-hook-form'
 import { StyleSheet, TextInput, TextInputProps } from 'react-native'
@@ -16,32 +18,33 @@ export const ThemedTextInput: FC<IThemedTextInputProps> = ({
   secureTextEntry,
   ...otherProps
 }) => {
+  const theme = useThemeColor()
   return (
     <>
       <TextInput
-        style={styles(!!error).input}
+        style={styles(theme, !!error).input}
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
         onBlur={onBlur}
-        placeholderTextColor={useThemeColor('placeholderTextColor')}
-        selectionColor={useThemeColor('primary')}
+        placeholderTextColor={ColorsAppTheme[theme].placeholderTextColor}
+        selectionColor={ColorsAppTheme[theme].primary}
         secureTextEntry={secureTextEntry}
       />
     </>
   )
 }
 
-const styles = (error?: boolean) =>
+const styles = (theme: ThemeApp, error?: boolean) =>
   StyleSheet.create({
     input: {
       borderRadius: 4,
       width: '100%',
       height: 40,
       padding: 10,
-      backgroundColor: useThemeColor('backgroundInput'),
-      color: useThemeColor('text'),
-      borderColor: error ? useThemeColor('error') : 'transparent',
+      backgroundColor: ColorsAppTheme[theme].backgroundInput,
+      color: ColorsAppTheme[theme].text,
+      borderColor: error ? ColorsAppTheme[theme].error : 'transparent',
       borderWidth: 1,
       borderStyle: 'solid'
     }

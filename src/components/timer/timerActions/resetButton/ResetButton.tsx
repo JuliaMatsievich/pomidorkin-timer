@@ -1,18 +1,19 @@
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { useThemeColor } from '@/hooks/useThemeColor'
 import { EnumStatus, EnumStatusImg, ITimerProps } from '@/types/timer.types'
 import { Entypo } from '@expo/vector-icons'
 import { FC } from 'react'
-import { Pressable, useColorScheme } from 'react-native'
+import { Pressable } from 'react-native'
 import { styles } from './resetButton.styles'
 
 interface IResetButtonProps extends Pick<ITimerProps, 'setTimerOptions'> {}
 
 export const ResetButton: FC<IResetButtonProps> = ({ setTimerOptions }) => {
-  const colorScheme = useColorScheme()
+  const theme = useThemeColor()
   return (
     <>
       <Pressable
-        style={styles(colorScheme).timerBtnReset}
+        style={styles(theme).timerBtnReset}
         onPress={() => {
           setTimerOptions({
             isPlaying: false,
@@ -23,7 +24,7 @@ export const ResetButton: FC<IResetButtonProps> = ({ setTimerOptions }) => {
             key: 0
           })
         }}>
-        <Entypo name={'ccw'} size={40} color={useThemeColor('icons2')} />
+        <Entypo name={'ccw'} size={40} color={ColorsAppTheme[theme].icons2} />
       </Pressable>
     </>
   )

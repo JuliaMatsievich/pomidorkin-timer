@@ -3,27 +3,30 @@ import { Indicator } from '@/components/timer/progressBar/Indicator/Indicator'
 import { Line } from '@/components/timer/progressBar/Line/Line'
 import { RestIndicator } from '@/components/timer/progressBar/RestIndicator/RestIndicator'
 import { sessionCount } from '@/constants/timer.const'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { IProgressBarProps } from '@/types/progressBar.types'
 import { FC } from 'react'
 import { styles } from './progressBar.styles'
 
 export const ProgressBar: FC<IProgressBarProps> = ({
-  isPlaying,
   currentSession,
   currentBreak
 }) => {
+  const theme = useThemeColor()
   const isSmallProgressBar = sessionCount > 7
   return (
     <>
-      <ThemedView style={styles.progressBarContainer}>
+      <ThemedView style={styles(theme).progressBarContainer}>
         {Array.from(Array(sessionCount)).map((_, index) => (
-          <ThemedView key={`point-${index}`} style={styles.progressBarItem}>
+          <ThemedView
+            key={`point-${index}`}
+            style={styles(theme).progressBarItem}>
             <Indicator
               isSmallProgressBar={isSmallProgressBar}
               index={index}
               currentSession={currentSession}
             />
-            <ThemedView style={styles.progressBarLineItem}>
+            <ThemedView style={styles(theme).progressBarLineItem}>
               <RestIndicator index={index} currentBreak={currentBreak} />
               {index + 1 !== sessionCount && (
                 <Line

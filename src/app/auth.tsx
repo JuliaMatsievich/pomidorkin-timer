@@ -4,6 +4,7 @@ import { ThemedText } from '@/components/customUI/ThemedText'
 import { ThemedView } from '@/components/customUI/ThemedView'
 import { FormItem } from '@/components/form/FormItem'
 import { Loader } from '@/components/Loader'
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { validEmail } from '@/constants/Patterns.const'
 import { useAuth } from '@/hooks/useAuth'
 import { useThemeColor } from '@/hooks/useThemeColor'
@@ -20,7 +21,7 @@ import {
 
 export const Auth = () => {
   const { setUser } = useAuth()
-
+  const theme = useThemeColor()
   const [isReg, setIsReg] = useState(true)
 
   const { control, reset, handleSubmit } = useForm<IAuthFormData>({
@@ -46,8 +47,8 @@ export const Auth = () => {
           headerShown: true,
           headerTitle: 'Помидоркин Таймер',
           headerTitleAlign: 'center',
-          statusBarColor: useThemeColor('statusBarColor'),
-          navigationBarColor: useThemeColor('navigationBarColor')
+          statusBarColor: ColorsAppTheme[theme].statusBarColor,
+          navigationBarColor: ColorsAppTheme[theme].navigationBarColor
         }}
       />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

@@ -1,4 +1,5 @@
 import { ThemedView } from '@/components/customUI/ThemedView'
+import { ColorsAppTheme } from '@/constants/ColorsAppTheme.const'
 import { sessionCount } from '@/constants/timer.const'
 import { useThemeColor } from '@/hooks/useThemeColor'
 import { IProgressPointProps } from '@/types/progressBar.types'
@@ -13,6 +14,7 @@ export const RestIndicator: FC<IRestIndicatorProps> = ({
   index,
   currentBreak
 }) => {
+  const theme = useThemeColor()
   return (
     <>
       <ThemedView style={styles.progressBarCircleRest}>
@@ -22,8 +24,8 @@ export const RestIndicator: FC<IRestIndicatorProps> = ({
             size={10}
             color={
               index < currentBreak
-                ? useThemeColor('primary')
-                : useThemeColor('colorProgress')
+                ? ColorsAppTheme[theme].primary
+                : ColorsAppTheme[theme].colorProgress
             }
           />
         )}
